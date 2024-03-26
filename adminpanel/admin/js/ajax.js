@@ -38,12 +38,11 @@ $(document).on("submit","#addCourseFrm" , function(){
   			'Success',
   			data.course_name.toUpperCase() + ' Successfully Added',
   			'success'
-  		)
+  		).then((result) => {
+            if(result.value) { $('#body').load(document.URL);}
+        })
           // $('#course_name').val("");
-          refreshDiv();
-            setTimeout(function(){ 
-                $('#body').load(document.URL);
-             }, 2000);
+        refreshDiv();
   	}
   },'json')
   return false;
@@ -337,7 +336,9 @@ $(document).on("submit","#addExamineeFrm" , function(){
           'Success',
           data.msg + ' are now successfully added',
           'success'
-       )
+       ).then((result) => {
+           if(result.value) { $('#body').load(document.URL);}
+      })
         refreshDiv();
         $('#addExamineeFrm')[0].reset();
     }
@@ -349,9 +350,6 @@ $(document).on("submit","#addExamineeFrm" , function(){
           'error'
        )
     }
-
-
-    
   },'json')
   return false;
 });
@@ -361,13 +359,16 @@ $(document).on("submit","#addExamineeFrm" , function(){
 // Update Examinee
 $(document).on("submit","#updateExamineeFrm" , function(){
   $.post("query/updateExamineeExe.php", $(this).serialize() , function(data){
+      console.log(data.res)
      if(data.res == "success")
      {
         Swal.fire(
             'Success',
             data.exFullname + ' <br>has been successfully updated!',
             'success'
-          )
+          ).then((result) => {
+            if (result.value) { window.location.reload()}
+        })
           refreshDiv();
      }
   },'json')

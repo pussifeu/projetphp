@@ -4,7 +4,7 @@
    <form class="refreshFrm" id="addFeebacks" method="post">
      <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Submit Feedbacks</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Soumettre des Feedbacks</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -12,11 +12,14 @@
       <div class="modal-body">
         <div class="col-md-12">
           <div class="form-group">
-            <label>Feedback AS</label><br>
+            <label>Feedback en tant que</label><br>
             <?php 
                $selMe = $conn->query("SELECT * FROM etudiant WHERE num_etudiant ='$exmneId' ")->fetch(PDO::FETCH_ASSOC);
              ?>
-            <input type="radio" name="asMe" value="<?php echo $selMe['exmne_fullname']; ?>"> <?php echo $selMe['exmne_fullname']; ?> <br>
+              <?php if (isset($selMe['exmne_fullname'])): ?>
+                  <input type="radio" name="asMe" value="<?php echo $selMe['exmne_fullname']; ?>"> <?php echo $selMe['exmne_fullname']; ?> <br>
+              <?php endif; ?>
+
             <input type="radio" name="asMe" value="Anonymous"> Anonymous
             
           </div>
@@ -26,8 +29,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Add Now</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        <button type="submit" class="btn btn-primary">Envoyer maintenant </button>
       </div>
     </div>
    </form>

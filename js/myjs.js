@@ -2,13 +2,13 @@
 $(document).on("click","#startQuiz", function(){
 	  var thisId = $(this).data('id');
 	  Swal.fire({
-      title: 'Are you sure?',
-      text: 'You want to take this exam now, your time will start automaticaly',
+      title: 'Êtes-vous sûr(e)?',
+      text: 'Vous souhaitez passer cet examen maintenant. Votre temps commencera automatiquement.',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, start now!'
+      confirmButtonText: 'Oui, commencez maintenant!', cancelButtonText:'Annuler'
  }).then((result) => {
   if (result.value) {
          $.ajax({
@@ -21,8 +21,8 @@ $(document).on("click","#startQuiz", function(){
             if(data.res == "alreadyExam")
             {
               Swal.fire(
-                'Already Taken ',
-                'you already take this exam',
+                'Déjà passé ',
+                'ous avez déjà passez cet examen',
                 'error'
               )
             }
@@ -37,10 +37,6 @@ $(document).on("click","#startQuiz", function(){
           }
 
         });
-
-
-
-
   }
  });
 	return false;
@@ -107,7 +103,8 @@ function redo() {
       secs = 59;
       mins--;
   }
-  document.cd.disp.value = dis(mins,secs); 
+  if(document.cd && document.cd.disp)
+     document.cd.disp.value = dis(mins,secs);
   if((mins == 0) && (secs == 0)) {
     $('#examAction').val("autoSubmit");
      $('#submitAnswerFrm').submit();

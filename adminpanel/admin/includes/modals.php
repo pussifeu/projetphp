@@ -144,7 +144,7 @@
         <div class="col-md-12">
         <div class="form-group">
             <label>Number</label>
-            <input type="" name="number" id="number" class="form-control" placeholder="Number" autocomplete="off" required="">
+            <input type="number" name="number" id="number" class="form-control" placeholder="Number" autocomplete="off" required="">
           </div>
           <div class="form-group">
             <label>Fullname</label>
@@ -163,9 +163,8 @@
             </select>
           </div>
           <div class="form-group">
-            <label>Course</label>
-            <select class="form-control" name="course" id="course">
-              <option value="0">Select course</option>
+            <label>Courses</label>
+            <select class="form-control" name="course[]" id="course" multiple="">
               <?php 
                 $selCourse = $conn->query("SELECT * FROM course_tbl ORDER BY cou_id asc");
                 while ($selCourseRow = $selCourse->fetch(PDO::FETCH_ASSOC)) { ?>

@@ -4,12 +4,7 @@ if(isset($_SESSION['examineeSession']['examineenakalogin']) == true) header("loc
 
  ?>
 
-<?php 
-
-include("login-ui/index.php");
-
-
- ?>
+<?php include("login-ui/index.php"); ?>
 
 
 <script type="text/javascript" src="js/jquery.js"></script>

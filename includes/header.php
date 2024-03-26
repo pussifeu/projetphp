@@ -65,7 +65,7 @@
                                     <div class="btn-group">
                                         <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
                                             <?php 
-                                                echo strtoupper($selExmneeData['exmne_fullname']);
+                                                if(isset($selExmneeData['exmne_fullname'])) echo strtoupper($selExmneeData['exmne_fullname']);
                                              ?>
                                             <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                         </a>

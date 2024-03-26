@@ -26,28 +26,26 @@
                             </thead>
                             <tbody>
                               <?php 
-                                $selExmne = $conn->query("SELECT * FROM etudiant et INNER JOIN exam_attempt ea ON et.num_etudiant = ea.num_etudiant ORDER BY ea.examat_id DESC ");
+                                $selExmne = $conn->query("SELECT et.*, e.*  FROM etudiant et  INNER JOIN exam_attempt ea ON et.num_etudiant = ea.num_etudiant INNER JOIN examen e ON e.num_exam=ea.exam_id");
                                 if($selExmne->rowCount() > 0)
                                 {
                                     while ($selExmneRow = $selExmne->fetch(PDO::FETCH_ASSOC)) { ?>
                                         <tr>
                                            <td><?php echo $selExmneRow['exmne_fullname']; ?></td>
                                            <td>
-                                             <?php 
+                                             <?php
                                                 $eid = $selExmneRow['num_etudiant'];
-                                                $selExName = $conn->query("SELECT * FROM examen et INNER JOIN exam_attempt ea ON et.num_exam=ea.exam_id WHERE  ea.num_etudiant='$eid' ")->fetch(PDO::FETCH_ASSOC);
-                                                $exam_id = $selExName['num_exam'];
-                                                echo $selExName['ex_title'];
+                                                $exam_id = $selExmneRow['num_exam'];
+                                                echo $selExmneRow['ex_title'];
                                               ?>
                                            </td>
                                            <td>
-                                                    <?php 
-                                                    $selScore = $conn->query("SELECT * FROM qcm eqt INNER JOIN exam_answers ea ON eqt.num_quest = ea.quest_id AND eqt.exam_answer = ea.exans_answer  WHERE ea.axmne_id='$eid' AND ea.exam_id='$exam_id' AND ea.exans_status='new' ");
-                                                      ?>
+                                               <?php
+                                               $selScore = $conn->query("SELECT * FROM qcm eqt INNER JOIN exam_answers ea ON eqt.num_quest = ea.quest_id AND eqt.exam_answer = ea.exans_answer  WHERE ea.axmne_id='$eid' AND ea.exam_id='$exam_id' AND ea.exans_status='new' "); ?>
                                                 <span>
                                                     <?php echo $selScore->rowCount(); ?>
                                                     <?php 
-                                                        $over  = $selExName['ex_questlimit_display'];
+                                                        $over  = $selExmneRow['ex_questlimit_display'];
                                                      ?>
                                                 </span> / <?php echo $over; ?>
                                            </td>
@@ -76,8 +74,8 @@
                                 else
                                 { ?>
                                     <tr>
-                                      <td colspan="2">
-                                        <h3 class="p-3">No Course Found</h3>
+                                      <td colspan="4">
+                                        <h3 class="p-3">No result found</h3>
                                       </td>
                                     </tr>
                                 <?php }

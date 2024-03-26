@@ -40,16 +40,16 @@
                                 <th>Fullname</th>
                                 <th>Gender</th>
                                 <th>Birthdate</th>
-                                <th>Course</th>
+                                <th>Courses</th>
                                 <th>Level</th>
                                 <th>Email</th>
                                 <th>Password</th>
-                                <th>status</th>
+                                <th>Status</th>
                                 <th></th>
                             </tr>
                             </thead>
                             <tbody>
-                              <?php 
+                              <?php
                                 $selExmne = $conn->query("SELECT * FROM etudiant ORDER BY num_etudiant DESC ");
                                 if($selExmne->rowCount() > 0)
                                 {
@@ -60,10 +60,13 @@
                                            <td><?php echo $selExmneRow['exmne_gender']; ?></td>
                                            <td><?php echo $selExmneRow['exmne_birthdate']; ?></td>
                                            <td>
-                                            <?php 
+                                            <?php
                                                  $exmneCourse = $selExmneRow['exmne_course'];
-                                                 $selCourse = $conn->query("SELECT * FROM course_tbl WHERE cou_id='$exmneCourse' ")->fetch(PDO::FETCH_ASSOC);
-                                                 echo $selCourse['cou_name'];
+                                                 $examenCourseArray = explode( ',', $exmneCourse );
+                                                 foreach($examenCourseArray as $value) {
+                                                    $selCourse = $conn->query("SELECT * FROM course_tbl WHERE cou_id='$value' ")->fetch(PDO::FETCH_ASSOC);
+                                                    echo $selCourse['cou_name']. "<br>";
+                                                 }
                                              ?>
                                             </td>
                                            <td><?php echo $selExmneRow['niveau']; ?></td>
@@ -80,8 +83,8 @@
                                 else
                                 { ?>
                                     <tr>
-                                      <td colspan="2">
-                                        <h3 class="p-3">No Course Found</h3>
+                                      <td colspan="10">
+                                        <h3 class="p-3">No Student Found</h3>
                                       </td>
                                     </tr>
                                 <?php }

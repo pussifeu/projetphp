@@ -15,7 +15,7 @@
       <div class="form-group">
         <legend>Number</legend>
         <input type="hidden" name="num_etudiant" value="<?php echo $id; ?>">
-        <input type="" name="exNumber" class="form-control" required="" value="<?php echo $selExmne['num_etudiant']; ?>" >
+        <input type="" name="exNumber" class="form-control" required=""readonly="" value="<?php echo $selExmne['num_etudiant']; ?>" >
      </div>
 
 
@@ -39,26 +39,33 @@
         <input type="date" name="exBdate" class="form-control" required="" value="<?php echo date('Y-m-d',strtotime($selExmne["exmne_birthdate"])) ?>"/>
      </div>
 
-     <div class="form-group">
-        <legend>Course</legend>
-        <?php 
-            $exmneCourse = $selExmne['exmne_course'];
-            $selCourse = $conn->query("SELECT * FROM course_tbl WHERE cou_id='$exmneCourse' ")->fetch(PDO::FETCH_ASSOC);
-         ?>
-         <select class="form-control" name="exCourse">
-           <option value="<?php echo $exmneCourse; ?>"><?php echo $selCourse['cou_name']; ?></option>
-           <?php 
-             $selCourse = $conn->query("SELECT * FROM course_tbl WHERE cou_id!='$exmneCourse' ");
-             while ($selCourseRow = $selCourse->fetch(PDO::FETCH_ASSOC)) { ?>
-              <option value="<?php echo $selCourseRow['cou_id']; ?>"><?php echo $selCourseRow['cou_name']; ?></option>
-            <?php  }
-            ?>
-         </select>
-     </div>
 
+    <div class="form-group">
+        <legend>Courses</legend>
+        <?php
+        $exmneCourse = $selExmne['exmne_course'];
+        $selCourse = $conn->query("SELECT * FROM course_tbl WHERE cou_id='$exmneCourse' ")->fetch(PDO::FETCH_ASSOC);
+        ?>
+        <select class="form-control" name="exCourse[]" multiple>
+                <?php
+                    $examenCourseArray = explode( ',', $exmneCourse );
+                    foreach($examenCourseArray as $value) {
+                        $selCourse = $conn->query("SELECT * FROM course_tbl WHERE cou_id='$value' ")->fetch(PDO::FETCH_ASSOC);
+                        echo $selCourse['cou_name']. "<br>";
+
+                        ?>
+                    <option value="<?php echo $value; ?>" selected><?php echo $selCourse['cou_name'];?></option>
+                    <?php $selOtherCourses = $conn->query("SELECT * FROM course_tbl WHERE cou_id NOT IN ($exmneCourse) ");} ?>
+
+                    <?php
+                        while ($selOtherCourseRow = $selOtherCourses->fetch(PDO::FETCH_ASSOC)) { ?>
+                        <option value="<?php echo $selOtherCourseRow['cou_id']; ?>"><?php echo $selOtherCourseRow['cou_name']; ?></option>
+                <?php } ?>
+        </select>
+    </div>
      <div class="form-group">
         <legend>Year level</legend>
-        <input type="" name="exYrlvl" class="form-control" required="" value="<?php echo $selExmne['niveau']; ?>" >
+        <input type="" name="exYrlvl" class="form-control" readonly="" required="" value="<?php echo $selExmne['niveau']; ?>" >
      </div>
 
      <div class="form-group">

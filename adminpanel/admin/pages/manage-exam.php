@@ -22,7 +22,7 @@
                                 <th class="text-left ">Description</th>
                                 <th class="text-left ">Time limit</th>  
                                 <th class="text-left ">Display limit</th>   
-                                <th class="text-center" width="20%">Action</th>
+                                <th class="text-center" width="20%">Actions</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -56,7 +56,7 @@
                                 else
                                 { ?>
                                     <tr>
-                                      <td colspan="5">
+                                      <td colspan="6">
                                         <h3 class="p-3">No Exam Found</h3>
                                       </td>
                                     </tr>

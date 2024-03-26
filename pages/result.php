@@ -24,13 +24,13 @@
             </div>
         </div>  
         <div class="row col-md-12">
-        	<h1 class="text-primary">RESULT'S</h1>
+        	<h1 class="text-primary">RESULTATS</h1>
         </div>
 
         <div class="row col-md-6 float-left">
         	<div class="main-card mb-3 card">
                 <div class="card-body">
-                	<h5 class="card-title">Your Answer's</h5>
+                	<h5 class="card-title">Votre réponses</h5>
         			<table class="align-middle mb-0 table table-borderless table-striped table-hover" id="tableList">
                     <?php 
                     	$selQuest = $conn->query("SELECT * FROM qcm eqt INNER JOIN exam_answers ea ON eqt.num_quest = ea.quest_id WHERE eqt.exam_id='$examId' AND ea.axmne_id='$exmneId' AND ea.exans_status='new' ");
@@ -95,18 +95,18 @@
                         </div>
                         <div class="widget-content-right">
                         <div class="widget-numbers text-white">
-                            <?php 
+                            <?php
                                 $selScore = $conn->query("SELECT * FROM qcm eqt INNER JOIN exam_answers ea ON eqt.num_quest = ea.quest_id AND eqt.exam_answer = ea.exans_answer  WHERE ea.axmne_id='$exmneId' AND ea.exam_id='$examId' AND ea.exans_status='new' ");
                             ?>
                             <span>
-                                <?php 
+                                <?php
                                     $score = $selScore->rowCount();
                                     $ans = $score / $over * 100;
                                     echo number_format($ans,2);
                                     echo "%";
-                                    
+
                                  ?>
-                            </span> 
+                            </span>
                         </div>
                     </div>
                 </div>

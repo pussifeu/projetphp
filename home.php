@@ -19,8 +19,6 @@ if(!isset($_SESSION['examineeSession']['examineenakalogin']) == true) header("lo
 
 <?php 
    @$page = $_GET['page'];
-
-
    if($page != '')
    {
      if($page == "exam")

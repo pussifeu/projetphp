@@ -38,7 +38,7 @@
                                 else
                                 { ?>
                                     <tr>
-                                      <td colspan="5">
+                                      <td colspan="3">
                                         <h3 class="p-3">No Feedback found</h3>
                                       </td>
                                     </tr>

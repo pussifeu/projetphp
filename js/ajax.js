@@ -87,14 +87,14 @@ if (result.value) {
   else
   {
       Swal.fire({
-    title: 'Are you sure?',
-    text: "you want to submit your answer now?",
+    title: 'Êtes-vous sûr ?',
+    text: "Vous voulez soumettre vos réponses maintenant ?",
     icon: 'warning',
     showCancelButton: true,
     allowOutsideClick: false,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, submit now!'
+    confirmButtonText: "D'accord, soumettre maintenant !", cancelButtonText: "Annuler"
 }).then((result) => {
 if (result.value) {
 

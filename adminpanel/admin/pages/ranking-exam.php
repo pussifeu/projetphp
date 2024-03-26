@@ -10,12 +10,7 @@
                 if($exam_id != "")
                 {
                    $selEx = $conn->query("SELECT * FROM examen WHERE num_exam='$exam_id' ")->fetch(PDO::FETCH_ASSOC);
-                   $exam_course = $selEx['cou_id'];
-
-                   
-
-                   $selExmne = $conn->query("SELECT * FROM etudiant et  WHERE exmne_course='$exam_course'  ");
-
+                   $selExmne = $conn->query("SELECT * FROM etudiant et  WHERE exmne_course IN (SELECT cou_id FROM course_tbl)  ");
 
                    ?>
                    <div class="app-page-title">
@@ -23,7 +18,7 @@
                         <div class="page-title-heading">
                             <div><b class="text-primary">RANKING BY EXAM</b><br>
                                 Exam Name : <?php echo $selEx['ex_title']; ?><br><br>
-                               <span class="border" style="padding:10px;color:white;background-color: #3ac47d;">Excellence</span>
+                               <span class="border" style="padding:10px;color:white;background-color: #3ac47d;">Excellent</span>
                                <span class="border" style="padding:10px;color:black;background-color: #E2FCEF;">Very Good</span>
                                <span class="border" style="padding:10px;color:white;background-color: #ced4da;">Good</span>
                                <span class="border" style="padding:10px;color:white;background-color: #d92550;">Failed</span>
@@ -48,13 +43,13 @@
                                             $exmneId = $selExmneRow['num_etudiant'];
                                             $selScore = $conn->query("SELECT * FROM qcm eqt INNER JOIN exam_answers ea ON eqt.num_quest = ea.quest_id AND eqt.exam_answer = ea.exans_answer  WHERE ea.axmne_id='$exmneId' AND ea.exam_id='$exam_id' AND ea.exans_status='new' ORDER BY ea.exans_id DESC");
 
-                                              $selAttempt = $conn->query("SELECT * FROM exam_attempt WHERE num_etudiant='$exmneId' AND exam_id='$exam_id' ");
+                                            $selAttempt = $conn->query("SELECT * FROM exam_attempt WHERE num_etudiant='$exmneId' AND exam_id='$exam_id' ");
 
                                              $over = $selEx['ex_questlimit_display']  ;    
 
 
                                               @$score = $selScore->rowCount();
-                                                @$ans = $score / $over * 100;
+                                              @$ans = $score / $over * 100;
 
                                          ?>
                                        <tr style="<?php 
@@ -185,8 +180,8 @@
                                 else
                                 { ?>
                                     <tr>
-                                      <td colspan="5">
-                                        <h3 class="p-3">No Exam Found</h3>
+                                      <td colspan="4">
+                                        <h3 class="p-3">No Rank Found</h3>
                                       </td>
                                     </tr>
                                 <?php }

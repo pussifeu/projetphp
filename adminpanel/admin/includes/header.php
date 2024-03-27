@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-<?php 
+<?php
   include("../../conn.php");
   include("query/countData.php");
  ?>
@@ -18,6 +18,8 @@
     <link href="./main.css" rel="stylesheet">
     <link href="css/sweetalert.css" rel="stylesheet">
     <link href="css/facebox.css" rel="stylesheet">
+
+    <script type="text/javascript" src="./js/jquery.js"></script>
 </head>
 <body id="body">
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header"  >

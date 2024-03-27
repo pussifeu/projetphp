@@ -15,14 +15,9 @@
             <script type="text/javascript">
                 $(document).ready(function(){
                     $("#search").keyup(function(){
-                        var search = $(this).val();
-                        $.ajax({
-                            url:'search.php',
-                            method:'post',
-                            data:{query:search},
-                            success:function(response){
-                                $("#tablelist").html(response);
-                            }
+                        var value = $(this).val().toLowerCase();
+                        $("#tableList tr").filter(function() {
+                            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                         });
                     });
                 });
